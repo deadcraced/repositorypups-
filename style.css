@@ -1,0 +1,169 @@
+/* ===== БАЗА ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --pink: #ffb3d1;
+  --pink-deep: #ff7eb3;
+  --purple: #c9a7ff;
+  --cream: #fff5f8;
+  --text: #4a2c3a;
+  --text-soft: #8a6b78;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: linear-gradient(135deg, #ffe0ec 0%, #f5e6ff 50%, #e6f0ff 100%);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ===== ПЛАВАЮЩИЕ СЕРДЕЧКИ ===== */
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 20px;
+  opacity: 0;
+  animation: rise linear infinite;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ===== ЭКРАНЫ ===== */
+.screen {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* ===== ГЛАВНЫЙ ЭКРАН ===== */
+.title {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  background: linear-gradient(90deg, var(--pink-deep), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ===== ФОТО-КАРТОЧКА ===== */
+.photo-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 950px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(180, 120, 180, 0.2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photo {
+  width: 320px;
+  max-width: 100%;
+  border-radius: 22px;
+  box-shadow: 0 15px 40px rgba(200, 130, 200, 0.35);
+  transition: transform 0.4s ease;
+}
+
+.photo:hover {
+  transform: scale(1.03) rotate(-1deg);
+}
+
+.photo-text {
+  flex: 1;
+  min-width: 260px;
+  text-align: left;
+}
+
+.photo-text h2 {
+  font-size: 1.8rem;
+  background: linear-gradient(90deg, var(--pink-deep), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+}
+
+.photo-text p {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== НА ТЕЛЕФОНЕ ===== */
+@media (max-width: 700px) {
+  .photo-card {
+    padding: 25px;
+    gap: 25px;
+  }
+  .photo {
+    width: 100%;
+  }
+  .photo-text {
+    text-align: center;
+  }
+  .photo-text h2 {
+    font-size: 1.5rem;
+  }
+}
